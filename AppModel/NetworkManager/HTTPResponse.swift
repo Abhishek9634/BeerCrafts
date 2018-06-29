@@ -21,25 +21,29 @@ class HTTPResponse: NSObject {
         
         let task : URLSessionDataTask = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             
-            var json: JSON? = nil
-            if let error = error {
-                print("ERROR RESPONSE (IF-ANY) :: \(error.localizedDescription)")
-                completion(json, error)
-            } else {
-                let httpResponse = response as! HTTPURLResponse
-                print("HTTP RESPONSE \(httpResponse.description) && CODE :: \(httpResponse.statusCode)")
-                if (httpResponse.statusCode == RESPONSE_CODE.SUCCESS.rawValue) {
-                    do {
-                        let jsonObject = try JSONSerialization.jsonObject(with: data!,
-                                                                          options: .allowFragments)
-                        json = JSON(jsonObject)
-                    }
-                    catch let err {
-                        print("RESPONSE_EXCEPTION :: \(err.localizedDescription)")
-                    }
+            DispatchQueue.main.async {
+                
+                var json: JSON? = nil
+                
+                if let error = error {
+                    print("ERROR RESPONSE (IF-ANY) :: \(error.localizedDescription)")
                     completion(json, error)
+                } else {
+                    let httpResponse = response as! HTTPURLResponse
+                    print("HTTP RESPONSE \(httpResponse.description) && CODE :: \(httpResponse.statusCode)")
+                    if (httpResponse.statusCode == RESPONSE_CODE.SUCCESS.rawValue) {
+                        do {
+                            let jsonObject = try JSONSerialization.jsonObject(with: data!,
+                                                                              options: .allowFragments)
+                            json = JSON(jsonObject)
+                        }
+                        catch let err {
+                            print("RESPONSE_EXCEPTION :: \(err.localizedDescription)")
+                        }
+                        completion(json, error)
+                    }
+                    print("RESPONSE DATA :: \(json.debugDescription)")
                 }
-                print("RESPONSE DATA :: \(json.debugDescription)")
             }
         }
         task.resume()

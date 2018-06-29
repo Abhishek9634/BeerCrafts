@@ -7,23 +7,23 @@
 //
 
 import UIKit
-import AppModel
 
 class MainViewController: UIViewController {
 
+    private struct Segue {
+        static let BeerList = "BeerListVCSegueId"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fetchBeerList()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    private func fetchBeerList() {
-        Beer.getBeerList { (list, error) in
-            print(list)
-        }
+    
+    @IBAction func beerListAction(_ sender: Any) {
+        self.performSegue(withIdentifier: Segue.BeerList, sender: nil)
     }
 }
 
