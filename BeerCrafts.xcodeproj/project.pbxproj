@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		389131F488696E7D807C40C1 /* Pods_BeerCrafts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBC984F1369608508680DA4 /* Pods_BeerCrafts.framework */; };
-		46333AB420E69BA3000B78DE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46333AAC20E69AA3000B78DE /* NetworkManager.swift */; };
+		46333AB420E69BA3000B78DE /* Beer+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46333AAC20E69AA3000B78DE /* Beer+API.swift */; };
 		46333AB520E69BA3000B78DE /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46333AAD20E69AA3000B78DE /* HTTPRequest.swift */; };
 		46333AB620E69BA3000B78DE /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46333AAE20E69AA3000B78DE /* HTTPResponse.swift */; };
 		46333AB720E69BA3000B78DE /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46333AAF20E69AA3000B78DE /* BaseRouter.swift */; };
 		4669C50A20E6963D00B52217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669C50920E6963D00B52217 /* AppDelegate.swift */; };
-		4669C50C20E6963D00B52217 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669C50B20E6963D00B52217 /* ViewController.swift */; };
+		4669C50C20E6963D00B52217 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669C50B20E6963D00B52217 /* MainViewController.swift */; };
 		4669C50F20E6963D00B52217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4669C50D20E6963D00B52217 /* Main.storyboard */; };
 		4669C51120E6963E00B52217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4669C51020E6963E00B52217 /* Assets.xcassets */; };
 		4669C51420E6963E00B52217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4669C51220E6963E00B52217 /* LaunchScreen.storyboard */; };
@@ -26,6 +26,7 @@
 		4669C53420E6994C00B52217 /* AppModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4669C52D20E6994C00B52217 /* AppModel.framework */; };
 		4669C53520E6994C00B52217 /* AppModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4669C52D20E6994C00B52217 /* AppModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46CA618220E69D59004B2EBB /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA618120E69D59004B2EBB /* APIConfig.swift */; };
+		46CA618420E69F24004B2EBB /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA618320E69F24004B2EBB /* Beer.swift */; };
 		955BA6A8020BE745BA0A4568 /* Pods_AppModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8B84AA7603EB4875EF1EDD /* Pods_AppModel.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,13 +58,13 @@
 		0F2D094C77277F6D34A3C9B2 /* Pods-AppModel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppModel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppModel/Pods-AppModel.debug.xcconfig"; sourceTree = "<group>"; };
 		1B8B84AA7603EB4875EF1EDD /* Pods_AppModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB8246EBBA1BBBECCA2133F /* Pods-AppModel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppModel.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppModel/Pods-AppModel.release.xcconfig"; sourceTree = "<group>"; };
-		46333AAC20E69AA3000B78DE /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		46333AAC20E69AA3000B78DE /* Beer+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Beer+API.swift"; sourceTree = "<group>"; };
 		46333AAD20E69AA3000B78DE /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		46333AAE20E69AA3000B78DE /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		46333AAF20E69AA3000B78DE /* BaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		4669C50620E6963D00B52217 /* BeerCrafts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerCrafts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4669C50920E6963D00B52217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4669C50B20E6963D00B52217 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4669C50B20E6963D00B52217 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4669C50E20E6963D00B52217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4669C51020E6963E00B52217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4669C51320E6963E00B52217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,6 +78,7 @@
 		4669C52F20E6994C00B52217 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		4669C53020E6994C00B52217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46CA618120E69D59004B2EBB /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		46CA618320E69F24004B2EBB /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		61142CBF7ED110EF4323547D /* Pods-BeerCrafts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerCrafts.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeerCrafts/Pods-BeerCrafts.release.xcconfig"; sourceTree = "<group>"; };
 		BD1A8F3F23A4F70405E075B2 /* Pods-BeerCrafts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerCrafts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerCrafts/Pods-BeerCrafts.debug.xcconfig"; sourceTree = "<group>"; };
 		DFBC984F1369608508680DA4 /* Pods_BeerCrafts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerCrafts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				46333AAF20E69AA3000B78DE /* BaseRouter.swift */,
-				46333AAC20E69AA3000B78DE /* NetworkManager.swift */,
 				46333AAD20E69AA3000B78DE /* HTTPRequest.swift */,
 				46333AAE20E69AA3000B78DE /* HTTPResponse.swift */,
 			);
@@ -170,8 +171,7 @@
 		4669C52720E6991800B52217 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				4669C50B20E6963D00B52217 /* ViewController.swift */,
-				4669C50D20E6963D00B52217 /* Main.storyboard */,
+				46CA618620E6A22F004B2EBB /* Main */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -182,8 +182,9 @@
 				4669C52F20E6994C00B52217 /* AppModel.h */,
 				4669C53020E6994C00B52217 /* Info.plist */,
 				46CA618120E69D59004B2EBB /* APIConfig.swift */,
-				46333AAB20E69AA3000B78DE /* NetworkManager */,
 				46CA618020E69D43004B2EBB /* Entities */,
+				46CA618520E6A1ED004B2EBB /* API */,
+				46333AAB20E69AA3000B78DE /* NetworkManager */,
 			);
 			path = AppModel;
 			sourceTree = "<group>";
@@ -191,8 +192,34 @@
 		46CA618020E69D43004B2EBB /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				46CA618320E69F24004B2EBB /* Beer.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		46CA618520E6A1ED004B2EBB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				46333AAC20E69AA3000B78DE /* Beer+API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		46CA618620E6A22F004B2EBB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4669C50D20E6963D00B52217 /* Main.storyboard */,
+				46CA618720E6A241004B2EBB /* Controller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		46CA618720E6A241004B2EBB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4669C50B20E6963D00B52217 /* MainViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		891A002D6B3C88520C73C609 /* Pods */ = {
@@ -400,7 +427,7 @@
 				4669C52120E6986B00B52217 /* ImageView.swift in Sources */,
 				4669C51D20E6981800B52217 /* TableViewCell.swift in Sources */,
 				4669C52320E698A400B52217 /* Loader.swift in Sources */,
-				4669C50C20E6963D00B52217 /* ViewController.swift in Sources */,
+				4669C50C20E6963D00B52217 /* MainViewController.swift in Sources */,
 				4669C51F20E6984B00B52217 /* CollectionViewCell.swift in Sources */,
 				4669C50A20E6963D00B52217 /* AppDelegate.swift in Sources */,
 			);
@@ -411,7 +438,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46333AB620E69BA3000B78DE /* HTTPResponse.swift in Sources */,
-				46333AB420E69BA3000B78DE /* NetworkManager.swift in Sources */,
+				46CA618420E69F24004B2EBB /* Beer.swift in Sources */,
+				46333AB420E69BA3000B78DE /* Beer+API.swift in Sources */,
 				46333AB520E69BA3000B78DE /* HTTPRequest.swift in Sources */,
 				46333AB720E69BA3000B78DE /* BaseRouter.swift in Sources */,
 				46CA618220E69D59004B2EBB /* APIConfig.swift in Sources */,
@@ -579,7 +607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Abhishek.BeerCrafts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -600,7 +628,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Abhishek.BeerCrafts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -618,7 +646,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = AppModel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -648,7 +676,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = AppModel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

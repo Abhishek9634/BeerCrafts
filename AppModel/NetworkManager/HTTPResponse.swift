@@ -17,7 +17,6 @@ enum RESPONSE_CODE: Int {
 class HTTPResponse: NSObject {
 
     class func response(with request: URLRequest,
-                        requestTitle:String,
                         completion: @escaping (_ json: JSON?, _ error: Error?) -> Void) {
         
         let task : URLSessionDataTask = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in

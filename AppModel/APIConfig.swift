@@ -11,6 +11,6 @@ import Foundation
 public struct APIConfig {
     
     public struct AppUrl {
-        static let Base = ""
+        static let Base = "http://starlord.hackerearth.com"
     }
 }

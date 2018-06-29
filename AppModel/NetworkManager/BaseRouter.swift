@@ -17,25 +17,21 @@ struct HTTPMethod {
 
 enum BaseRouter {
     
-    case sendData(deviceId: String, readings: [Any])
-    case getUser(deviceId: String)
+    case getBeerList
     
     public var httpMethod: String {
         switch self {
-        case .sendData:
-            return HTTPMethod.put
-        case .getUser:
+        case .getBeerList:
             return HTTPMethod.get
         }
     }
     
     public var path: String {
-        return ""
+        return "/beercraft"
     }
     
     public var params: [String: Any] {
-        var param: [String: Any] = [:]
-        return param
+        return [:]
     }
     
     public var baseUrl: URL {
@@ -43,7 +39,6 @@ enum BaseRouter {
     }
     
     public var headers: [String: String] {
-        var headers = ["Content-Type": "application/json"]
-        return headers
+        return ["Content-Type": "application/json"]
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  BeerCrafts
 //
 //  Created by Abhishek on 29/06/18.
@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import AppModel
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.fetchBeerList()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-
+    private func fetchBeerList() {
+        Beer.getBeerList { (list, error) in
+            print(list)
+        }
+    }
 }
 
