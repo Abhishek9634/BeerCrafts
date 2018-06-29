@@ -16,6 +16,12 @@ class BeerListViewController: UIViewController {
     
     private var cellItems: [BeerCellModel] = []
     private var filterItems: [BeerCellModel] = []
+    private var appliedFilters: [FilterCellModel] = []
+    private var isAscending: Bool = false
+    
+    private struct Segue {
+        static let Filters = "FiltersVCSegueId"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,7 @@ class BeerListViewController: UIViewController {
     }
     
     @IBAction func sortAction(_ sender: Any) {
-        
+        self.sortList()
     }
     
     @IBAction func filterAction(_ sender: Any) {
@@ -58,6 +64,7 @@ extension BeerListViewController {
             if !list.isEmpty {
                 this.cellItems = list.map { BeerCellModel(beer: $0) }
                 this.filterItems = this.cellItems
+                this.sortList()
                 this.tableView.reloadData()
             }
         }
@@ -65,10 +72,25 @@ extension BeerListViewController {
     
     private func sortList() {
         
+        self.isAscending = !self.isAscending
+
+        if self.isAscending {
+            self.filterItems = self.filterItems.sorted(by: {
+                let order = $0.beer.abv.compare($1.beer.abv, options: .numeric)
+                return order == .orderedAscending
+            })
+        } else {
+            self.filterItems = self.filterItems.sorted(by: {
+                let order = $0.beer.abv.compare($1.beer.abv, options: .numeric)
+                return order == .orderedDescending
+            })
+        }
+        
+        self.tableView.reloadData()
     }
     
     private func filterList() {
-        
+        self.performSegue(withIdentifier: Segue.Filters, sender: self.appliedFilters)
     }
 }
 
@@ -107,6 +129,28 @@ extension BeerListViewController: BeerTableViewCellDelegate {
     }
 }
 
+extension BeerListViewController: FiltersViewControllerDelegate {
+    
+    func applyFilters(filters: [FilterCellModel]) {
+        
+    }
+}
+
+extension BeerListViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch (segue.identifier, segue.destination, sender) {
+        case (Segue.Filters?,
+              let vc as FiltersViewController,
+              let filters as [FilterCellModel]):
+            vc.selectedFilters = filters
+        default:
+            break
+        }
+        super.prepare(for: segue, sender: sender)
+    }
+}
+
 extension BeerListViewController: UISearchBarDelegate {
     
     func setupSearchBar() {
@@ -138,6 +182,6 @@ extension BeerListViewController: UISearchBarDelegate {
         searchBar.text = nil
         searchBar.resignFirstResponder()
         self.filterItems = self.cellItems
-        self.tableView.reloadData()
+        self.sortList()
     }
 }

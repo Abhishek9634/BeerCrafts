@@ -12,3 +12,14 @@ import AppModel
 struct BeerCellModel {
     var beer: Beer
 }
+
+class FilterCellModel {
+    
+    var style: String
+    var isSelected: Bool
+    
+    init(style: String, isSelected: Bool = false) {
+        self.style = style
+        self.isSelected = isSelected
+    }
+}
