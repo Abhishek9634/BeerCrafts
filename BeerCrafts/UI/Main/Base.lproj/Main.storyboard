@@ -53,25 +53,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search by Name or Style" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiV-Rf-bc2">
+                            <searchBar contentMode="redraw" placeholder="Search by Name" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiV-Rf-bc2">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eNI-uW-VL7">
-                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="safeArea" id="yX2-sK-5Z2"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiV-jB-f6h" userLabel="Bottom View">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOr-sT-XaU">
+                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Sort"/>
+                                        <connections>
+                                            <action selector="sortAction:" destination="FMG-Rw-Hkg" eventType="touchDown" id="Xc8-We-Pwi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNb-xh-jZv">
+                                        <rect key="frame" x="188.5" y="0.0" width="186.5" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Filter"/>
+                                        <connections>
+                                            <action selector="filterAction:" destination="FMG-Rw-Hkg" eventType="touchDown" id="CEo-a0-1pX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="MPv-bu-mPq" firstAttribute="bottom" secondItem="mOr-sT-XaU" secondAttribute="bottom" id="BER-41-RmE"/>
+                                    <constraint firstAttribute="height" constant="44" id="CUc-Lw-RqG"/>
+                                    <constraint firstItem="WNb-xh-jZv" firstAttribute="width" secondItem="mOr-sT-XaU" secondAttribute="width" id="F2Q-Gx-80D"/>
+                                    <constraint firstItem="mOr-sT-XaU" firstAttribute="leading" secondItem="MPv-bu-mPq" secondAttribute="leading" id="JGB-qJ-1af"/>
+                                    <constraint firstItem="WNb-xh-jZv" firstAttribute="top" secondItem="MPv-bu-mPq" secondAttribute="top" id="e7N-WT-qRV"/>
+                                    <constraint firstItem="mOr-sT-XaU" firstAttribute="top" secondItem="MPv-bu-mPq" secondAttribute="top" id="lcK-lK-8hU"/>
+                                    <constraint firstItem="MPv-bu-mPq" firstAttribute="trailing" secondItem="WNb-xh-jZv" secondAttribute="trailing" id="nS7-7G-9FU"/>
+                                    <constraint firstItem="MPv-bu-mPq" firstAttribute="bottom" secondItem="WNb-xh-jZv" secondAttribute="bottom" id="oVP-8x-3vi"/>
+                                    <constraint firstItem="WNb-xh-jZv" firstAttribute="leading" secondItem="mOr-sT-XaU" secondAttribute="trailing" constant="2" id="tBg-VL-8sS"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="MPv-bu-mPq"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="eNI-uW-VL7" firstAttribute="leading" secondItem="qca-m2-Rou" secondAttribute="leading" id="8jX-mp-g9T"/>
+                            <constraint firstItem="qca-m2-Rou" firstAttribute="trailing" secondItem="wiV-jB-f6h" secondAttribute="trailing" id="Dul-AG-gNj"/>
+                            <constraint firstItem="wiV-jB-f6h" firstAttribute="leading" secondItem="qca-m2-Rou" secondAttribute="leading" id="IG1-bB-jHu"/>
                             <constraint firstItem="IiV-Rf-bc2" firstAttribute="leading" secondItem="qca-m2-Rou" secondAttribute="leading" id="Nvg-Cs-Kru"/>
                             <constraint firstItem="IiV-Rf-bc2" firstAttribute="top" secondItem="qca-m2-Rou" secondAttribute="top" id="OIX-a0-3hV"/>
                             <constraint firstItem="qca-m2-Rou" firstAttribute="trailing" secondItem="eNI-uW-VL7" secondAttribute="trailing" id="PZG-CC-1fM"/>
+                            <constraint firstItem="wiV-jB-f6h" firstAttribute="bottom" secondItem="qca-m2-Rou" secondAttribute="bottom" id="UiE-6b-neB"/>
                             <constraint firstItem="eNI-uW-VL7" firstAttribute="top" secondItem="IiV-Rf-bc2" secondAttribute="bottom" id="a2x-ee-fD5"/>
                             <constraint firstItem="IiV-Rf-bc2" firstAttribute="trailing" secondItem="qca-m2-Rou" secondAttribute="trailing" id="b3Z-It-aN8"/>
-                            <constraint firstItem="qca-m2-Rou" firstAttribute="bottom" secondItem="eNI-uW-VL7" secondAttribute="bottom" id="rLX-Gy-EgY"/>
+                            <constraint firstItem="wiV-jB-f6h" firstAttribute="top" secondItem="eNI-uW-VL7" secondAttribute="bottom" id="ym7-7C-KIf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qca-m2-Rou"/>
                     </view>
@@ -89,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7T-gU-Zmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="-573"/>
+            <point key="canvasLocation" x="2149.5999999999999" y="-573.46326836581716"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dKK-4p-LYY">

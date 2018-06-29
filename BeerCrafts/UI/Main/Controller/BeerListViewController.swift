@@ -31,6 +31,14 @@ class BeerListViewController: UIViewController {
     @IBAction func cartAction(_ sender: Any) {
         
     }
+    
+    @IBAction func sortAction(_ sender: Any) {
+        
+    }
+    
+    @IBAction func filterAction(_ sender: Any) {
+        self.filterList()
+    }
 }
 
 extension BeerListViewController {
@@ -53,6 +61,14 @@ extension BeerListViewController {
                 this.tableView.reloadData()
             }
         }
+    }
+    
+    private func sortList() {
+        
+    }
+    
+    private func filterList() {
+        
     }
 }
 
@@ -103,7 +119,7 @@ extension BeerListViewController: UISearchBarDelegate {
         } else {
             self.filterItems.removeAll()
             let array = self.cellItems.filter {
-                ($0.beer.name.lowercased().contains(searchText.lowercased()) || $0.beer.style.lowercased().contains(searchText.lowercased()))
+                $0.beer.name.lowercased().contains(searchText.lowercased())
             }
             self.filterItems.append(contentsOf: array)
         }
