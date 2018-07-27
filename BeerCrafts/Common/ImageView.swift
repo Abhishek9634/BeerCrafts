@@ -45,10 +45,8 @@ public class ImageView: UIImageView {
             placeholderImage: placeHolder,
             options: options) { [weak self] (image, _, _, _) in
                 guard let this = self else { return }
-                this.image = image
                 this.stopLoader()
         }
-        
     }
     
     private func startLoader() {

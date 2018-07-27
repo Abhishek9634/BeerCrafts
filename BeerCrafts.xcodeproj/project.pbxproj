@@ -25,6 +25,8 @@
 		4669C53120E6994C00B52217 /* AppModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4669C52F20E6994C00B52217 /* AppModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4669C53420E6994C00B52217 /* AppModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4669C52D20E6994C00B52217 /* AppModel.framework */; };
 		4669C53520E6994C00B52217 /* AppModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4669C52D20E6994C00B52217 /* AppModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4679F083210B2BF700711FC8 /* beer.json in Resources */ = {isa = PBXBuildFile; fileRef = 4679F082210B2BF700711FC8 /* beer.json */; };
+		4679F088210B2E6D00711FC8 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4679F087210B2E6D00711FC8 /* AppError.swift */; };
 		46CA618220E69D59004B2EBB /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA618120E69D59004B2EBB /* APIConfig.swift */; };
 		46CA618420E69F24004B2EBB /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA618320E69F24004B2EBB /* Beer.swift */; };
 		46CA618920E6A5C0004B2EBB /* BeerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA618820E6A5C0004B2EBB /* BeerListViewController.swift */; };
@@ -83,6 +85,8 @@
 		4669C52D20E6994C00B52217 /* AppModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4669C52F20E6994C00B52217 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		4669C53020E6994C00B52217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4679F082210B2BF700711FC8 /* beer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = beer.json; sourceTree = "<group>"; };
+		4679F087210B2E6D00711FC8 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		46CA618120E69D59004B2EBB /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		46CA618320E69F24004B2EBB /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		46CA618820E6A5C0004B2EBB /* BeerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewController.swift; sourceTree = "<group>"; };
@@ -152,8 +156,8 @@
 			children = (
 				4669C50920E6963D00B52217 /* AppDelegate.swift */,
 				4669C52720E6991800B52217 /* UI */,
-				4669C52620E6990000B52217 /* Resources */,
 				4669C51B20E6980800B52217 /* Common */,
+				4669C52620E6990000B52217 /* Resources */,
 			);
 			path = BeerCrafts;
 			sourceTree = "<group>";
@@ -173,6 +177,7 @@
 		4669C52620E6990000B52217 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4679F082210B2BF700711FC8 /* beer.json */,
 				4669C51020E6963E00B52217 /* Assets.xcassets */,
 				4669C51220E6963E00B52217 /* LaunchScreen.storyboard */,
 				4669C51520E6963E00B52217 /* Info.plist */,
@@ -194,11 +199,20 @@
 				4669C52F20E6994C00B52217 /* AppModel.h */,
 				4669C53020E6994C00B52217 /* Info.plist */,
 				46CA618120E69D59004B2EBB /* APIConfig.swift */,
+				4679F086210B2E5000711FC8 /* Error */,
 				46CA618020E69D43004B2EBB /* Entities */,
 				46CA618520E6A1ED004B2EBB /* API */,
 				46333AAB20E69AA3000B78DE /* NetworkManager */,
 			);
 			path = AppModel;
+			sourceTree = "<group>";
+		};
+		4679F086210B2E5000711FC8 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				4679F087210B2E6D00711FC8 /* AppError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		46CA618020E69D43004B2EBB /* Entities */ = {
@@ -372,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4679F083210B2BF700711FC8 /* beer.json in Resources */,
 				4669C51420E6963E00B52217 /* LaunchScreen.storyboard in Resources */,
 				4669C51120E6963E00B52217 /* Assets.xcassets in Resources */,
 				4669C50F20E6963D00B52217 /* Main.storyboard in Resources */,
@@ -483,6 +498,7 @@
 				46333AB520E69BA3000B78DE /* HTTPRequest.swift in Sources */,
 				46333AB720E69BA3000B78DE /* BaseRouter.swift in Sources */,
 				46CA618220E69D59004B2EBB /* APIConfig.swift in Sources */,
+				4679F088210B2E6D00711FC8 /* AppError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

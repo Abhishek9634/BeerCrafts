@@ -58,7 +58,18 @@ extension BeerListViewController {
     
     private func fetchBeerList() {
         self.showLoader()
-        Beer.getBeerList { [weak self] (list, error) in
+//        Beer.getBeerList { [weak self] (list, error) in
+//            guard let this = self else { return }
+//            this.hideLoader()
+//            if !list.isEmpty {
+//                this.cellItems = list.map { BeerCellModel(beer: $0) }
+//                this.filterItems = this.cellItems
+//                this.sortList()
+//                this.tableView.reloadData()
+//            }
+//        }
+        
+        Beer.getBeerListOffline { [weak self] (list, error) in
             guard let this = self else { return }
             this.hideLoader()
             if !list.isEmpty {

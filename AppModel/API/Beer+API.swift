@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 public extension Beer {
     
@@ -26,6 +27,28 @@ public extension Beer {
             } else {
                 completion([], error)
             }
+        }
+    }
+}
+
+// REQUEST OFFLINE
+extension Beer {
+    
+    public static func getBeerListOffline(completion: @escaping (_ beerList: [Beer], _ error: Error?) -> Void) {
+        
+        guard let filePath = Bundle.main.url(forResource: "beer",
+                                             withExtension: "json") else {
+            completion([], AppError.fileNotFound)
+            return
+        }
+
+        do {
+            let data = try Data.init(contentsOf: filePath)
+            let json = try JSON(data: data)
+            let list: [Beer] = try json.arrayValue.map { try Beer.parse($0) }
+            completion(list, nil)
+        } catch {
+            completion([], error)
         }
     }
 }
