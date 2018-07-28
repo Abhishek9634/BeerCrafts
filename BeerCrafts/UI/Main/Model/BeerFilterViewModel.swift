@@ -88,7 +88,6 @@ extension BeerFilterViewModel {
     
     func clearFilters() {
         self.sections.forEach {
-            ($0.headerModel as? HeaderModel)?.isSelected = false
             $0.cellModels.forEach { model in
                 (model as? FilterCellModel)?.isSelected = false
             }
@@ -96,4 +95,8 @@ extension BeerFilterViewModel {
         self.reloadHandler()
     }
     
+    func updateFilter(at indexPath: IndexPath) {
+        let cellModel = self.item(at: indexPath) as! FilterCellModel
+        cellModel.isSelected = !cellModel.isSelected
+    }
 }

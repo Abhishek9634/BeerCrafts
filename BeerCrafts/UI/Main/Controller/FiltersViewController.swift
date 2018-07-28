@@ -114,7 +114,8 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        
+        self.viewModel.updateFilter(at: indexPath)
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 
