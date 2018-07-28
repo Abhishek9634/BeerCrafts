@@ -12,6 +12,7 @@ import AppModel
 class BeerFilterViewModel {
     
     var sections: [SectionModel] = []
+    var reloadHandler: DataHandler = { }
     
     init(list: [Beer] = []) {
         self.configure(list: list)
@@ -84,5 +85,15 @@ extension BeerFilterViewModel {
 
 // APPLY and CLEAR
 extension BeerFilterViewModel {
+    
+    func clearFilters() {
+        self.sections.forEach {
+            ($0.headerModel as? HeaderModel)?.isSelected = false
+            $0.cellModels.forEach { model in
+                (model as? FilterCellModel)?.isSelected = false
+            }
+        }
+        self.reloadHandler()
+    }
     
 }

@@ -23,6 +23,13 @@ class FiltersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.setupModel()
+    }
+    
+    private func setupModel() {
+        self.viewModel.reloadHandler = {
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +37,7 @@ class FiltersViewController: UIViewController {
     }
     
     @IBAction func clearAction(_ sender: Any) {
-        // TODO
+        self.viewModel.clearFilters()
     }
     
     @IBAction func applyAction(_ sender: Any) {
