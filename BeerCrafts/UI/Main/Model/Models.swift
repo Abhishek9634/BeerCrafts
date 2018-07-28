@@ -13,7 +13,8 @@ struct BeerCellModel {
     var beer: Beer
 }
 
-struct SectionModel {
+class SectionModel {
+    
     var headerModel: Any?
     var cellModels: [Any] = []
     var footerModel: Any?
@@ -39,6 +40,14 @@ class FilterCellModel {
     }
 }
 
-struct HeaderModel {
+class HeaderModel {
+    
     var text: String
+    var isSelected: Bool
+    
+    init(text: String,
+         isSelected: Bool = false) {
+        self.text = text
+        self.isSelected = isSelected
+    }
 }

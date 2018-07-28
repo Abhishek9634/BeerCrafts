@@ -19,7 +19,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gH1-pD-mUc">
                     <rect key="frame" x="0.0" y="0.0" width="442" height="148"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCI-dg-euC">
+                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWF-9j-eEG">
+                            <rect key="frame" x="0.0" y="0.0" width="442" height="148"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="tapAction:" destination="-1" eventType="touchDown" id="bR0-DW-mAV"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCI-dg-euC">
                             <rect key="frame" x="16" y="10" width="410" height="128"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -28,9 +35,13 @@
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="TWF-9j-eEG" firstAttribute="leading" secondItem="gH1-pD-mUc" secondAttribute="leading" id="2DU-nh-55R"/>
                         <constraint firstItem="QCI-dg-euC" firstAttribute="top" secondItem="gH1-pD-mUc" secondAttribute="top" constant="10" id="2GD-NX-QCv"/>
                         <constraint firstItem="QCI-dg-euC" firstAttribute="leading" secondItem="gH1-pD-mUc" secondAttribute="leading" constant="16" id="9iK-94-Zf9"/>
+                        <constraint firstAttribute="bottom" secondItem="TWF-9j-eEG" secondAttribute="bottom" id="Mdq-nE-WIU"/>
                         <constraint firstAttribute="trailing" secondItem="QCI-dg-euC" secondAttribute="trailing" constant="16" id="QU7-II-e7V"/>
+                        <constraint firstAttribute="trailing" secondItem="TWF-9j-eEG" secondAttribute="trailing" id="Sk0-cP-Bec"/>
+                        <constraint firstItem="TWF-9j-eEG" firstAttribute="top" secondItem="gH1-pD-mUc" secondAttribute="top" id="VIc-Dp-BLJ"/>
                         <constraint firstAttribute="bottom" secondItem="QCI-dg-euC" secondAttribute="bottom" constant="10" id="sGg-qH-yC5"/>
                     </constraints>
                 </view>
@@ -46,6 +57,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="tapButton" destination="TWF-9j-eEG" id="HBx-vS-Juz"/>
                 <outlet property="titleLabel" destination="QCI-dg-euC" id="sAC-Kf-0EW"/>
             </connections>
             <point key="canvasLocation" x="66" y="-162"/>

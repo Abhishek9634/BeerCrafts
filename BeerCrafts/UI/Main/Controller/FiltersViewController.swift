@@ -58,15 +58,6 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView,
-                   viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: "FilterHeaderView"
-        ) as? FilterHeaderView else { return UIView() }
-        headerView.item = self.viewModel.sectionModel(at: section)
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -78,7 +69,21 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.itemCount(at: section)
+        guard let sectionModel = self.viewModel.sectionModel(
+            at: section
+        ) as? HeaderModel else { return 0 }
+        return sectionModel.isSelected ? self.viewModel.itemCount(at: section) : 0
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: "FilterHeaderView"
+        ) as? FilterHeaderView else { return UIView() }
+        headerView.item = self.viewModel.sectionModel(at: section)
+        headerView.tag = section
+        headerView.delegate = self
+        return headerView
     }
     
     func tableView(_ tableView: UITableView,
@@ -99,9 +104,17 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
+        
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension FiltersViewController: FilterHeaderViewDelegate {
+    
+    func didSelect(headerView: FilterHeaderView) {
+        let indexSet = IndexSet(integer: headerView.tag)
+        self.tableView.reloadSections(indexSet, with: .automatic)
     }
 }
