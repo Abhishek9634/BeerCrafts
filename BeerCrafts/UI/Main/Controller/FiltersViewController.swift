@@ -9,15 +9,15 @@
 import UIKit
 
 protocol FiltersViewControllerDelegate: class {
-    func applyFilters(filters: [FilterCellModel])
+    func applyFilters(filters: [Any])
 }
 
 class FiltersViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var cellItems: [FilterCellModel] = []
-    var selectedFilters: [FilterCellModel] = []
+    var cellItems: [Any] = []
+    var selectedFilters: [Any] = []
     
     weak var delegate: FiltersViewControllerDelegate?
     
@@ -44,11 +44,11 @@ class FiltersViewController: UIViewController {
 extension FiltersViewController {
     
     private func updateFilters() {
-        for item in self.cellItems {
-            if self.selectedFilters.contains(where: { $0.style == item.style }) {
-                item.isSelected = true
-            }
-        }
+//        for item in self.cellItems {
+//            if self.selectedFilters.contains(where: { $0.style == item.style }) {
+//                item.isSelected = true
+//            }
+//        }
     }
 }
 
@@ -72,16 +72,16 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = self.cellItems[indexPath.row]
-        model.isSelected = !model.isSelected
-        
-        if model.isSelected {
-            self.selectedFilters.append(model)
-        } else {
-            self.selectedFilters = self.selectedFilters.filter {
-                $0.style != model.style
-            }
-        }
-        self.tableView.reloadRows(at: [indexPath], with: .none)
+//        let model = self.cellItems[indexPath.row]
+//        model.isSelected = !model.isSelected
+//        
+//        if model.isSelected {
+//            self.selectedFilters.append(model)
+//        } else {
+//            self.selectedFilters = self.selectedFilters.filter {
+//                $0.style != model.style
+//            }
+//        }
+//        self.tableView.reloadRows(at: [indexPath], with: .none)
     }
 }

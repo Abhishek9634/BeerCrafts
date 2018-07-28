@@ -112,24 +112,24 @@ extension BeerListViewController: BeerTableViewCellDelegate {
 
 extension BeerListViewController: FiltersViewControllerDelegate {
     
-    func applyFilters(filters: [FilterCellModel]) {
+    func applyFilters(filters: [Any]) {
         
     }
 }
 
 extension BeerListViewController {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch (segue.identifier, segue.destination, sender) {
-        case (Segue.Filters?,
-              let vc as FiltersViewController,
-              let filters as [FilterCellModel]):
-            vc.selectedFilters = filters
-        default:
-            break
-        }
-        super.prepare(for: segue, sender: sender)
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        switch (segue.identifier, segue.destination, sender) {
+//        case (Segue.Filters?,
+//              let vc as FiltersViewController,
+//              let filters as [Any]):
+//            vc.selectedFilters = filters
+//        default:
+//            break
+//        }
+//        super.prepare(for: segue, sender: sender)
+//    }
 }
 
 extension BeerListViewController: UISearchBarDelegate {

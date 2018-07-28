@@ -21,9 +21,9 @@ class FilterTableViewCell: TableViewCell {
     }
     
     override func configure(_ item: Any?) {
-        if let model = item as? FilterCellModel {
-            self.styleLabel.text = model.style
-            self.styleLabel.textColor = isSelected ? .blue : .black
-        }
+//        if let model = item as? FilterCellModel {
+//            self.styleLabel.text = model.style
+//            self.styleLabel.textColor = isSelected ? .blue : .black
+//        }
     }
 }

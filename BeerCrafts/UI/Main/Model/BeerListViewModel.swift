@@ -15,9 +15,13 @@ class BeerListViewModel {
     
     var items: [BeerCellModel] = []
     var searchItems: [BeerCellModel] = []
-    var appliedFilters: [FilterCellModel] = []
+    var appliedFilters: [Any] = []
+    
     var reloadHandler: DataHandler = { }
+    
     private var isAscending: Bool = false
+    
+    var filterModel = BeerFilterViewModel()
     
     init() { }
     
@@ -35,16 +39,23 @@ class BeerListViewModel {
                 completion(error)
             } else {
                 self?.configureModels(list: list)
+                self?.configureFilters(list: list)
                 completion(nil)
             }
         }
     }
     
     private func configureModels(list: [Beer]) {
-        self.items = list.map {
-            BeerCellModel(beer: $0)
-        }
+        self.items = list.map { BeerCellModel(beer: $0) }
         self.searchItems = self.items
+    }
+}
+
+// FILTER
+extension BeerListViewModel {
+    
+    func configureFilters(list: [Beer]) {
+        self.filterModel = BeerFilterViewModel(list: list)
     }
 }
 
@@ -83,9 +94,4 @@ extension BeerListViewModel {
         })
         self.reloadHandler()
     }
-}
-
-// FILTER
-extension BeerListViewModel {
-    
 }

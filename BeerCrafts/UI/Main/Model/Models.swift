@@ -13,13 +13,32 @@ struct BeerCellModel {
     var beer: Beer
 }
 
-class FilterCellModel {
+struct SectionModel {
+    var headerModel: Any?
+    var cellModels: [Any] = []
+    var footerModel: Any?
     
-    var style: String
+    init(headerModel: Any? = nil,
+         cellModels: [Any] = [],
+         footerModel: Any? = nil) {
+        self.headerModel = headerModel
+        self.cellModels = cellModels
+        self.footerModel = footerModel
+    }
+}
+
+struct FilterCellModel {
+    
+    var type: String
     var isSelected: Bool
     
-    init(style: String, isSelected: Bool = false) {
-        self.style = style
+    init(type: String,
+         isSelected: Bool = false) {
+        self.type = type
         self.isSelected = isSelected
     }
+}
+
+struct HeaderModel {
+    var text: String
 }
