@@ -143,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-573.46326836581716"/>
         </scene>
-        <!--Filters View Controller-->
+        <!--Filters-->
         <scene sceneID="kCd-Ry-VBY">
             <objects>
                 <viewController storyboardIdentifier="FiltersViewController" id="1GU-vu-V8g" customClass="FiltersViewController" customModule="BeerCrafts" customModuleProvider="target" sceneMemberID="viewController">
@@ -154,33 +154,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uJo-ka-pdD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FilterTableViewCell" rowHeight="50" id="PqE-hV-oJv" customClass="FilterTableViewCell" customModule="BeerCrafts" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PqE-hV-oJv" id="3Lc-Ge-2Vw">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afy-az-Wy7">
-                                                    <rect key="frame" x="16" y="10" width="343" height="29.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="afy-az-Wy7" secondAttribute="bottom" constant="10" id="C32-wA-yc0"/>
-                                                <constraint firstItem="afy-az-Wy7" firstAttribute="top" secondItem="3Lc-Ge-2Vw" secondAttribute="top" constant="10" id="GvR-u5-shF"/>
-                                                <constraint firstItem="afy-az-Wy7" firstAttribute="leading" secondItem="3Lc-Ge-2Vw" secondAttribute="leading" constant="16" id="gH7-cA-MBL"/>
-                                                <constraint firstAttribute="trailing" secondItem="afy-az-Wy7" secondAttribute="trailing" constant="16" id="o0y-ES-7tc"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="styleLabel" destination="afy-az-Wy7" id="k8L-1H-EE7"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JSP-GG-uhn" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -243,6 +216,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XeH-QH-dgE"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Filters" id="mZg-TC-B0o"/>
                     <connections>
                         <outlet property="tableView" destination="uJo-ka-pdD" id="0lc-YY-zi6"/>
                     </connections>

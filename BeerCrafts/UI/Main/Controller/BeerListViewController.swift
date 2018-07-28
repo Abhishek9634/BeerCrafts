@@ -67,7 +67,7 @@ extension BeerListViewController {
     
     private func showFilters() {
         self.performSegue(withIdentifier: Segue.Filters,
-                          sender: self.viewModel.appliedFilters)
+                          sender: self.viewModel.filterModel)
     }
 }
 
@@ -78,7 +78,8 @@ extension BeerListViewController: UITableViewDelegate, UITableViewDataSource {
         return self.viewModel.itemCount
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "BeerTableViewCell"
         ) as! BeerTableViewCell
@@ -119,17 +120,17 @@ extension BeerListViewController: FiltersViewControllerDelegate {
 
 extension BeerListViewController {
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        switch (segue.identifier, segue.destination, sender) {
-//        case (Segue.Filters?,
-//              let vc as FiltersViewController,
-//              let filters as [Any]):
-//            vc.selectedFilters = filters
-//        default:
-//            break
-//        }
-//        super.prepare(for: segue, sender: sender)
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch (segue.identifier, segue.destination, sender) {
+        case (Segue.Filters?,
+              let vc as FiltersViewController,
+              let viewModel as BeerFilterViewModel):
+            vc.viewModel = viewModel
+        default:
+            break
+        }
+        super.prepare(for: segue, sender: sender)
+    }
 }
 
 extension BeerListViewController: UISearchBarDelegate {

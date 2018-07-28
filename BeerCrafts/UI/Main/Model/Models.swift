@@ -27,7 +27,7 @@ struct SectionModel {
     }
 }
 
-struct FilterCellModel {
+class FilterCellModel {
     
     var type: String
     var isSelected: Bool

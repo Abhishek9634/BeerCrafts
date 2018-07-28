@@ -20,7 +20,7 @@ class BeerFilterViewModel {
     func configure(list: [Beer]) {
         
         let abvDictionary = list.reduce(into: [String: Int]()) { (dictionary, model) in
-            let type = model.abv
+            let type = model.abv.isEmpty ? "0.00" : model.abv
             dictionary[type] = 0
         }
         
@@ -65,9 +65,9 @@ extension BeerFilterViewModel {
         ].cellModels
     }
     
-    func itemCount(at indexPath: IndexPath) -> Int {
+    func itemCount(at section: Int) -> Int {
         return self.sections[
-            indexPath.section
+            section
         ].cellModels.count
     }
     
@@ -75,9 +75,14 @@ extension BeerFilterViewModel {
         return self.sections.count
     }
     
-    func sectionModel(at indexPath: IndexPath) -> Any? {
+    func sectionModel(at section: Int) -> Any? {
         return self.sections[
-            indexPath.section
+            section
         ].headerModel
     }
+}
+
+// APPLY and CLEAR
+extension BeerFilterViewModel {
+    
 }
