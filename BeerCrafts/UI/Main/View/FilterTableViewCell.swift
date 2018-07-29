@@ -22,7 +22,7 @@ class FilterTableViewCell: TableViewCell {
  
     override func configure(_ item: Any?) {
         guard let model = item as? FilterCellModel else { return }
-        self.filterLabel.text = model.type
+        self.filterLabel.text = model.value
         self.filterLabel.textColor = model.isSelected ? .blue  : .black
     }
 }

@@ -30,24 +30,24 @@ class SectionModel {
 
 class FilterCellModel {
     
-    var type: String
+    var value: String
     var isSelected: Bool
     
-    init(type: String,
+    init(value: String,
          isSelected: Bool = false) {
-        self.type = type
+        self.value = value
         self.isSelected = isSelected
     }
 }
 
 class HeaderModel {
     
-    var text: String
+    var type: String
     var isSelected: Bool
     
-    init(text: String,
+    init(type: String,
          isSelected: Bool = false) {
-        self.text = text
+        self.type = type
         self.isSelected = isSelected
     }
 }

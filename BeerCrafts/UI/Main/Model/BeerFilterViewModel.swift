@@ -13,6 +13,13 @@ class BeerFilterViewModel {
     
     var sections: [SectionModel] = []
     var reloadHandler: DataHandler = { }
+    var filters: [String: [String]] = [:]
+    
+    private struct FilterTypes {
+        static let Style = "Style"
+        static let Ounces = "Ounces"
+        static let ABV = "ABV"
+    }
     
     init(list: [Beer] = []) {
         self.configure(list: list)
@@ -35,16 +42,16 @@ class BeerFilterViewModel {
             dictionary[type] = 0
         }
         
-        let abvCellModels = abvDictionary.map { FilterCellModel(type: $0.key) }
-        let ouncesCellModels = ouncesDictionary.map { FilterCellModel(type: $0.key) }
-        let styleCellModels = styleDictionary.map { FilterCellModel(type: $0.key) }
+        let abvCellModels = abvDictionary.map { FilterCellModel(value: $0.key) }
+        let ouncesCellModels = ouncesDictionary.map { FilterCellModel(value: $0.key) }
+        let styleCellModels = styleDictionary.map { FilterCellModel(value: $0.key) }
         
         self.sections = [
-            SectionModel(headerModel: HeaderModel(text: "Style"),
+            SectionModel(headerModel: HeaderModel(type: FilterTypes.Style),
                          cellModels: styleCellModels),
-            SectionModel(headerModel: HeaderModel(text: "Ounces"),
+            SectionModel(headerModel: HeaderModel(type: FilterTypes.Ounces),
                          cellModels: ouncesCellModels),
-            SectionModel(headerModel: HeaderModel(text: "Alcohol(By Vol.)"),
+            SectionModel(headerModel: HeaderModel(type: FilterTypes.ABV),
                          cellModels: abvCellModels)
         ]
     }
@@ -92,11 +99,29 @@ extension BeerFilterViewModel {
                 (model as? FilterCellModel)?.isSelected = false
             }
         }
+        self.filters.removeAll()
         self.reloadHandler()
     }
     
     func updateFilter(at indexPath: IndexPath) {
-        let cellModel = self.item(at: indexPath) as! FilterCellModel
+        
+        guard let sectionModel = self.sectionModel(at: indexPath.section) as? HeaderModel,
+              let cellModel = self.item(at: indexPath) as? FilterCellModel else { return }
+        
         cellModel.isSelected = !cellModel.isSelected
+        
+        if cellModel.isSelected {
+            if let _ = self.filters[sectionModel.type] {
+                self.filters[sectionModel.type]?.append(cellModel.value)
+            } else {
+                self.filters[sectionModel.type] = [cellModel.value]
+            }
+        } else {
+            guard let values = self.filters[sectionModel.type],
+                  let index = values.index(where: {
+                  $0 == cellModel.value
+              }) else { return }
+            self.filters[sectionModel.type]?.remove(at: index)
+        }
     }
 }
