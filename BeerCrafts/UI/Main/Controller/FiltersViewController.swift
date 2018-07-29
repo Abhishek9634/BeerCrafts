@@ -75,6 +75,16 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.bounds.height/4
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         guard let sectionModel = self.viewModel.sectionModel(
             at: section
@@ -102,16 +112,6 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView,
-                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height/4
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-        
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         self.viewModel.updateFilter(at: indexPath)

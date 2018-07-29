@@ -123,5 +123,6 @@ extension BeerFilterViewModel {
               }) else { return }
             self.filters[sectionModel.type]?.remove(at: index)
         }
+        print("UPDATED FILTERS : \(self.filters)")
     }
 }
