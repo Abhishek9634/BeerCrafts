@@ -27,11 +27,10 @@ class BeerTableViewCell: TableViewCell {
     }
     
     override func configure(_ item: Any?) {
-        if let model = item as? BeerCellModel {
-            self.themeLabel.text = model.beer.style
-            self.nameLabel.text = model.beer.name
-            self.alcoholContentLabel.text = model.beer.abv
-        }
+        guard let model = item as? BeerCellModel else { return }
+        self.themeLabel.text = model.beer.style
+        self.nameLabel.text = model.beer.name
+        self.alcoholContentLabel.text = model.beer.abv
     }
     
     @IBAction func addAction(_ sender: Any) {
