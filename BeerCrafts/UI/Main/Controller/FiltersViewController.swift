@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FiltersViewControllerDelegate: class {
-    func applyFilters(filters: [Any])
+    func applyFilters(filters: [String: [String]])
 }
 
 class FiltersViewController: UIViewController {
@@ -41,8 +41,7 @@ class FiltersViewController: UIViewController {
     }
     
     @IBAction func applyAction(_ sender: Any) {
-        // TODO
-        self.delegate?.applyFilters(filters: [])
+        self.delegate?.applyFilters(filters: self.viewModel.filters)
         self.navigationController?.popViewController(animated: true)
     }
 }

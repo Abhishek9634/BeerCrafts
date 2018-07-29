@@ -13,17 +13,13 @@ typealias DataHandler = () -> Void
 
 class BeerListViewModel {
     
+    init() { }
+    
     var items: [BeerCellModel] = []
     var searchItems: [BeerCellModel] = []
-    var appliedFilters: [Any] = []
-    
     var reloadHandler: DataHandler = { }
-    
     private var isAscending: Bool = false
-    
     var filterModel = BeerFilterViewModel()
-    
-    init() { }
     
     var itemCount: Int {
         return self.searchItems.count
@@ -56,6 +52,11 @@ extension BeerListViewModel {
     
     func configureFilters(list: [Beer]) {
         self.filterModel = BeerFilterViewModel(list: list)
+    }
+    
+    func applyFilters(filters: [String: [String]]) {
+        // TODO
+        self.reloadHandler()
     }
 }
 
