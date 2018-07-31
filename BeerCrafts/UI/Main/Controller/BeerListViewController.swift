@@ -40,7 +40,7 @@ class BeerListViewController: UIViewController {
     }
     
     @IBAction func filterAction(_ sender: Any) {
-        self.showFilters()
+//        self.showFilters()
     }
 }
 
