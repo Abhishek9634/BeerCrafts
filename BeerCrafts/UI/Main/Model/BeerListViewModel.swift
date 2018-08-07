@@ -34,6 +34,7 @@ class BeerListViewModel {
             if let error = error {
                 completion(error)
             } else {
+                print("TOTAL ITEMS: \(list.count)")
                 self?.configureModels(list: list)
                 self?.configureFilters(list: list)
                 completion(nil)
@@ -54,8 +55,33 @@ extension BeerListViewModel {
         self.filterModel = BeerFilterViewModel(list: list)
     }
     
+    func clearFilters() {
+        self.resetData()
+    }
+    
     func applyFilters(filters: [String: [String]]) {
-        // TODO
+
+        var rawItems = [BeerCellModel]()
+        
+        for (key, value) in filters {
+            switch key {
+            case FilterTypes.Style:
+                let results = self.items.filter { value.contains($0.beer.style) }
+                rawItems.append(contentsOf: results)
+            case FilterTypes.Ounces:
+                let results = self.items.filter { value.contains(String($0.beer.ounces)) }
+                rawItems.append(contentsOf: results)
+            case FilterTypes.ABV:
+                let results = self.items.filter { value.contains($0.beer.abv) }
+                rawItems.append(contentsOf: results)
+            default: break
+            }
+        }
+        
+        print("BF Filter: \(rawItems.count)")
+        let set = NSSet(array: rawItems)
+        self.searchItems = set.allObjects as! [BeerCellModel]
+        print("AF Filter : \(rawItems.count)")
         self.reloadHandler()
     }
 }

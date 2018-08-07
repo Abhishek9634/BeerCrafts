@@ -40,7 +40,7 @@ class BeerListViewController: UIViewController {
     }
     
     @IBAction func filterAction(_ sender: Any) {
-//        self.showFilters()
+        self.showFilters()
     }
 }
 
@@ -116,6 +116,10 @@ extension BeerListViewController: FiltersViewControllerDelegate {
     func applyFilters(filters: [String: [String]]) {
         self.viewModel.applyFilters(filters: filters)
     }
+    
+    func clearFilters() {
+        self.viewModel.clearFilters()
+    }
 }
 
 extension BeerListViewController {
@@ -126,6 +130,7 @@ extension BeerListViewController {
               let vc as FiltersViewController,
               let viewModel as BeerFilterViewModel):
             vc.viewModel = viewModel
+            vc.delegate = self
         default:
             break
         }

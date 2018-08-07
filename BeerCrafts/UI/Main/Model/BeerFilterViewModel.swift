@@ -9,17 +9,17 @@
 import Foundation
 import AppModel
 
+struct FilterTypes {
+    static let Style = "Style"
+    static let Ounces = "Ounces"
+    static let ABV = "ABV"
+}
+
 class BeerFilterViewModel {
     
     var sections: [SectionModel] = []
     var reloadHandler: DataHandler = { }
     var filters: [String: [String]] = [:]
-    
-    private struct FilterTypes {
-        static let Style = "Style"
-        static let Ounces = "Ounces"
-        static let ABV = "ABV"
-    }
     
     init(list: [Beer] = []) {
         self.configure(list: list)

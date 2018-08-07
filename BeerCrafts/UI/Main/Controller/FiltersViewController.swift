@@ -10,6 +10,7 @@ import UIKit
 
 protocol FiltersViewControllerDelegate: class {
     func applyFilters(filters: [String: [String]])
+    func clearFilters()
 }
 
 class FiltersViewController: UIViewController {
@@ -38,6 +39,7 @@ class FiltersViewController: UIViewController {
     
     @IBAction func clearAction(_ sender: Any) {
         self.viewModel.clearFilters()
+        self.delegate?.clearFilters()
     }
     
     @IBAction func applyAction(_ sender: Any) {
