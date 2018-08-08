@@ -42,10 +42,10 @@ class FilterCellModel {
 
 class HeaderModel {
     
-    var type: String
+    var type: FilterType
     var isSelected: Bool
     
-    init(type: String,
+    init(type: FilterType,
          isSelected: Bool = false) {
         self.type = type
         self.isSelected = isSelected

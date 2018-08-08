@@ -23,7 +23,7 @@ class FilterHeaderView: TableHeaderFooterView {
     
     override func configure(_ item: Any?) {
         guard let model = item as? HeaderModel else { return }
-        self.titleLabel.text = model.type
+        self.titleLabel.text = model.type.rawValue
     }
     
     @IBAction func tapAction(_ sender: Any) {

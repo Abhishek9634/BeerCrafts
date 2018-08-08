@@ -59,29 +59,23 @@ extension BeerListViewModel {
         self.resetData()
     }
     
-    func applyFilters(filters: [String: [String]]) {
-
-        var rawItems = [BeerCellModel]()
-        
-        for (key, value) in filters {
-            switch key {
-            case FilterTypes.Style:
-                let results = self.items.filter { value.contains($0.beer.style) }
-                rawItems.append(contentsOf: results)
-            case FilterTypes.Ounces:
-                let results = self.items.filter { value.contains(String($0.beer.ounces)) }
-                rawItems.append(contentsOf: results)
-            case FilterTypes.ABV:
-                let results = self.items.filter { value.contains($0.beer.abv) }
-                rawItems.append(contentsOf: results)
-            default: break
-            }
-        }
-        
-        print("BF Filter: \(rawItems.count)")
-        let set = NSSet(array: rawItems)
-        self.searchItems = set.allObjects as! [BeerCellModel]
-        print("AF Filter : \(rawItems.count)")
+    func applyFilters(filters: [FilterType: [String]]) {
+		self.searchItems = self.items.filter { item -> Bool in
+			var acceptArray: [Bool] = []
+			for (key, value) in filters {
+				switch key {
+				case .style:
+					acceptArray.append(value.isEmpty ? true : value.contains(item.beer.style))
+				case .ounces:
+					acceptArray.append(value.isEmpty ? true : value.contains(String(item.beer.ounces)))
+				case .abv:
+					acceptArray.append(value.isEmpty ? true : value.contains(item.beer.abv))
+				}
+			}
+			return acceptArray.reduce(true, { (result, value) -> Bool in
+				return result && value
+			})
+		}
         self.reloadHandler()
     }
 }
