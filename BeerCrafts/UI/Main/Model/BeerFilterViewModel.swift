@@ -9,17 +9,17 @@
 import Foundation
 import AppModel
 
-struct FilterTypes {
-    static let Style = "Style"
-    static let Ounces = "Ounces"
-    static let ABV = "ABV"
+enum FilterType: String {
+    case style = "Style"
+    case ounces = "Ounces"
+    case abv = "ABV"
 }
 
 class BeerFilterViewModel {
     
     var sections: [SectionModel] = []
     var reloadHandler: DataHandler = { }
-    var filters: [String: [String]] = [:]
+    var filters: [FilterType: [String]] = [:]
     
     init(list: [Beer] = []) {
         self.configure(list: list)
@@ -47,11 +47,11 @@ class BeerFilterViewModel {
         let styleCellModels = styleDictionary.map { FilterCellModel(value: $0.key) }
         
         self.sections = [
-            SectionModel(headerModel: HeaderModel(type: FilterTypes.Style),
+            SectionModel(headerModel: HeaderModel(type: .style),
                          cellModels: styleCellModels),
-            SectionModel(headerModel: HeaderModel(type: FilterTypes.Ounces),
+            SectionModel(headerModel: HeaderModel(type: .ounces),
                          cellModels: ouncesCellModels),
-            SectionModel(headerModel: HeaderModel(type: FilterTypes.ABV),
+            SectionModel(headerModel: HeaderModel(type: .abv),
                          cellModels: abvCellModels)
         ]
     }
@@ -59,18 +59,18 @@ class BeerFilterViewModel {
 
 extension BeerFilterViewModel {
     
-    func item(at indexPath: IndexPath) -> Any {
+    func item(at indexPath: IndexPath) -> FilterCellModel {
         return self.sections[
             indexPath.section
         ].cellModels[
             indexPath.row
-        ]
+        ] as! FilterCellModel
     }
     
-    func items(at indexPath: IndexPath) -> [Any] {
+    func items(at indexPath: IndexPath) -> [FilterCellModel] {
         return self.sections[
             indexPath.section
-        ].cellModels
+        ].cellModels as! [FilterCellModel]
     }
     
     func itemCount(at section: Int) -> Int {
@@ -105,9 +105,9 @@ extension BeerFilterViewModel {
     
     func updateFilter(at indexPath: IndexPath) {
         
-        guard let sectionModel = self.sectionModel(at: indexPath.section) as? HeaderModel,
-              let cellModel = self.item(at: indexPath) as? FilterCellModel else { return }
-        
+        guard let sectionModel = self.sectionModel(at: indexPath.section) as? HeaderModel else { return }
+		
+		let cellModel = self.item(at: indexPath)
         cellModel.isSelected = !cellModel.isSelected
         
         if cellModel.isSelected {

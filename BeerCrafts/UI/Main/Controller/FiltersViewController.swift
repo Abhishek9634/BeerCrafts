@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FiltersViewControllerDelegate: class {
-    func applyFilters(filters: [String: [String]])
+    func applyFilters(filters: [FilterType: [String]])
     func clearFilters()
 }
 

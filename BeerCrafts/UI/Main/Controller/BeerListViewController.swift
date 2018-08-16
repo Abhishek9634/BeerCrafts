@@ -113,7 +113,7 @@ extension BeerListViewController: BeerTableViewCellDelegate {
 
 extension BeerListViewController: FiltersViewControllerDelegate {
     
-    func applyFilters(filters: [String: [String]]) {
+    func applyFilters(filters: [FilterType: [String]]) {
         self.viewModel.applyFilters(filters: filters)
     }
     
