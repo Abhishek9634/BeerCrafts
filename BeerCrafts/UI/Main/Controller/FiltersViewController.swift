@@ -9,21 +9,28 @@
 import UIKit
 
 protocol FiltersViewControllerDelegate: class {
-    func applyFilters(filters: [FilterCellModel])
+    func applyFilters(filters: [FilterType: [String]])
+    func clearFilters()
 }
 
 class FiltersViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var cellItems: [FilterCellModel] = []
-    var selectedFilters: [FilterCellModel] = []
+    var viewModel = BeerFilterViewModel()
     
     weak var delegate: FiltersViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.updateFilters()
+        self.setupView()
+        self.setupModel()
+    }
+    
+    private func setupModel() {
+        self.viewModel.reloadHandler = {
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,57 +38,92 @@ class FiltersViewController: UIViewController {
     }
     
     @IBAction func clearAction(_ sender: Any) {
-        self.selectedFilters.removeAll()
-        self.tableView.reloadData()
+        self.viewModel.clearFilters()
+        self.delegate?.clearFilters()
     }
     
     @IBAction func applyAction(_ sender: Any) {
-        self.delegate?.applyFilters(filters: self.selectedFilters)
+        self.delegate?.applyFilters(filters: self.viewModel.filters)
         self.navigationController?.popViewController(animated: true)
-    }
-}
-
-extension FiltersViewController {
-    
-    private func updateFilters() {
-        for item in self.cellItems {
-            if self.selectedFilters.contains(where: { $0.style == item.style }) {
-                item.isSelected = true
-            }
-        }
     }
 }
 
 extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cellItems.count
+    private func setupView() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: "FilterTableViewCell",
+                                      bundle: nil),
+                                forCellReuseIdentifier: "FilterTableViewCell")
+        self.tableView.register(UINib(nibName: "FilterHeaderView",
+                                      bundle: nil),
+                                forHeaderFooterViewReuseIdentifier: "FilterHeaderView")
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.viewModel.sectionCount
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return tableView.bounds.height/4
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.bounds.height/4
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        guard let sectionModel = self.viewModel.sectionModel(
+            at: section
+        ) as? HeaderModel else { return 0 }
+        return sectionModel.isSelected ? self.viewModel.itemCount(at: section) : 0
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: "FilterHeaderView"
+        ) as? FilterHeaderView else { return UIView() }
+        headerView.item = self.viewModel.sectionModel(at: section)
+        headerView.tag = section
+        headerView.delegate = self
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "FilterTableViewCell"
         ) as! FilterTableViewCell
-        cell.item = self.cellItems[indexPath.row]
+        cell.item = self.viewModel.item(at: indexPath)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        self.viewModel.updateFilter(at: indexPath)
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+}
+
+extension FiltersViewController: FilterHeaderViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let model = self.cellItems[indexPath.row]
-        model.isSelected = !model.isSelected
-        
-        if model.isSelected {
-            self.selectedFilters.append(model)
-        } else {
-            self.selectedFilters = self.selectedFilters.filter {
-                $0.style != model.style
-            }
-        }
-        self.tableView.reloadRows(at: [indexPath], with: .none)
+    func didSelect(headerView: FilterHeaderView) {
+        let indexSet = IndexSet(integer: headerView.tag)
+        self.tableView.reloadSections(indexSet, with: .automatic)
     }
 }

@@ -14,10 +14,7 @@ class BeerListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    private var cellItems: [BeerCellModel] = []
-    private var filterItems: [BeerCellModel] = []
-    private var appliedFilters: [FilterCellModel] = []
-    private var isAscending: Bool = false
+    private var viewModel = BeerListViewModel()
     
     private struct Segue {
         static let Filters = "FiltersVCSegueId"
@@ -27,7 +24,7 @@ class BeerListViewController: UIViewController {
         super.viewDidLoad()
         self.setupTableView()
         self.setupSearchBar()
-        self.fetchBeerList()
+        self.setupViewModel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,11 +36,11 @@ class BeerListViewController: UIViewController {
     }
     
     @IBAction func sortAction(_ sender: Any) {
-        self.sortList()
+        self.viewModel.sortItems()
     }
     
     @IBAction func filterAction(_ sender: Any) {
-        self.filterList()
+        self.showFilters()
     }
 }
 
@@ -56,79 +53,53 @@ extension BeerListViewController {
                                 forCellReuseIdentifier: "BeerTableViewCell")
     }
     
-    private func fetchBeerList() {
+    private func setupViewModel() {
+        
+        self.viewModel.reloadHandler = {
+            self.tableView.reloadData()
+        }
+        
         self.showLoader()
-//        Beer.getBeerList { [weak self] (list, error) in
-//            guard let this = self else { return }
-//            this.hideLoader()
-//            if !list.isEmpty {
-//                this.cellItems = list.map { BeerCellModel(beer: $0) }
-//                this.filterItems = this.cellItems
-//                this.sortList()
-//                this.tableView.reloadData()
-//            }
-//        }
-        
-        Beer.getBeerListOffline { [weak self] (list, error) in
-            guard let this = self else { return }
-            this.hideLoader()
-            if !list.isEmpty {
-                this.cellItems = list.map { BeerCellModel(beer: $0) }
-                this.filterItems = this.cellItems
-                this.sortList()
-                this.tableView.reloadData()
-            }
+        self.viewModel.fetchItems { _ in
+            self.hideLoader()
         }
     }
     
-    private func sortList() {
-        
-        self.isAscending = !self.isAscending
-
-        if self.isAscending {
-            self.filterItems = self.filterItems.sorted(by: {
-                let order = $0.beer.abv.compare($1.beer.abv, options: .numeric)
-                return order == .orderedAscending
-            })
-        } else {
-            self.filterItems = self.filterItems.sorted(by: {
-                let order = $0.beer.abv.compare($1.beer.abv, options: .numeric)
-                return order == .orderedDescending
-            })
-        }
-        
-        self.tableView.reloadData()
-    }
-    
-    private func filterList() {
-        self.performSegue(withIdentifier: Segue.Filters, sender: self.appliedFilters)
+    private func showFilters() {
+        self.performSegue(withIdentifier: Segue.Filters,
+                          sender: self.viewModel.filterModel)
     }
 }
 
 extension BeerListViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filterItems.count
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.itemCount
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "BeerTableViewCell"
         ) as! BeerTableViewCell
         cell.delegate = self
-        cell.item = self.filterItems[indexPath.row]
+        cell.item = self.viewModel.item(indexPath)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
         
     }
 }
@@ -142,8 +113,12 @@ extension BeerListViewController: BeerTableViewCellDelegate {
 
 extension BeerListViewController: FiltersViewControllerDelegate {
     
-    func applyFilters(filters: [FilterCellModel]) {
-        
+    func applyFilters(filters: [FilterType: [String]]) {
+        self.viewModel.applyFilters(filters: filters)
+    }
+    
+    func clearFilters() {
+        self.viewModel.clearFilters()
     }
 }
 
@@ -153,8 +128,9 @@ extension BeerListViewController {
         switch (segue.identifier, segue.destination, sender) {
         case (Segue.Filters?,
               let vc as FiltersViewController,
-              let filters as [FilterCellModel]):
-            vc.selectedFilters = filters
+              let viewModel as BeerFilterViewModel):
+            vc.viewModel = viewModel
+            vc.delegate = self
         default:
             break
         }
@@ -169,16 +145,7 @@ extension BeerListViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            self.filterItems = self.cellItems
-        } else {
-            self.filterItems.removeAll()
-            let array = self.cellItems.filter {
-                $0.beer.name.lowercased().contains(searchText.lowercased())
-            }
-            self.filterItems.append(contentsOf: array)
-        }
-        self.tableView.reloadData()
+        self.viewModel.filterSearch(searchText: searchBar.text ?? "")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -190,9 +157,8 @@ extension BeerListViewController: UISearchBarDelegate {
     }
     
     private func resetData() {
-        searchBar.text = nil
-        searchBar.resignFirstResponder()
-        self.filterItems = self.cellItems
-        self.sortList()
+        self.searchBar.text = nil
+        self.searchBar.resignFirstResponder()
+        self.viewModel.resetData()
     }
 }
