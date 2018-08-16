@@ -1,0 +1,6 @@
+framework module Pods_BeerCrafts {
+  umbrella header "Pods-BeerCrafts-umbrella.h"
+
+  export *
+  module * { export * }
+}

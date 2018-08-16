@@ -1,0 +1,6 @@
+framework module Pods_AppModel {
+  umbrella header "Pods-AppModel-umbrella.h"
+
+  export *
+  module * { export * }
+}
