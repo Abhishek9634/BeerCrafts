@@ -35,6 +35,9 @@ class BeerListViewModel {
                 completion(error)
             } else {
                 print("TOTAL ITEMS: \(list.count)")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
+//                    self?.configureModels(list: list)
+//                })
                 self?.configureModels(list: list)
                 self?.configureFilters(list: list)
                 completion(nil)
@@ -45,6 +48,7 @@ class BeerListViewModel {
     private func configureModels(list: [Beer]) {
         self.items = list.map { BeerCellModel(beer: $0) }
         self.searchItems = self.items
+        self.reloadHandler()
     }
 }
 
