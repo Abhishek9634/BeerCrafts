@@ -142,6 +142,11 @@ extension BeerListViewController: UISearchBarDelegate {
     
     func setupSearchBar() {
         self.searchBar.delegate = self
+        self.searchBar.setShowsCancelButton(false, animated: false)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -157,6 +162,7 @@ extension BeerListViewController: UISearchBarDelegate {
     }
     
     private func resetData() {
+        searchBar.setShowsCancelButton(false, animated: true)
         self.searchBar.text = nil
         self.searchBar.resignFirstResponder()
         self.viewModel.resetData()

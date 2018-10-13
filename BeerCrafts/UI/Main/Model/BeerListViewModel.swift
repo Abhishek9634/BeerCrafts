@@ -8,25 +8,33 @@
 
 import Foundation
 import AppModel
+import RxSwift
+import RxCocoa
 
 typealias DataHandler = () -> Void
 
+let disposableBag = DisposeBag()
+
 class BeerListViewModel {
     
-    init() { }
-    
     var items: [BeerCellModel] = []
-    var searchItems: [BeerCellModel] = []
+    var searchItems = BehaviorRelay<[BeerCellModel]>(value: [])
     var reloadHandler: DataHandler = { }
     private var isAscending: Bool = false
     var filterModel = BeerFilterViewModel()
     
     var itemCount: Int {
-        return self.searchItems.count
+        return self.searchItems.value.count
+    }
+    
+    init() {
+        let _ = self.searchItems.asObservable().subscribe(onNext: { _ in
+            self.reloadHandler()
+        }).disposed(by: disposableBag)
     }
     
     func item(_ indexPath: IndexPath) -> BeerCellModel {
-        return self.searchItems[indexPath.row]
+        return self.searchItems.value[indexPath.row]
     }
     
     func fetchItems(completion: @escaping (_ error: Error?) -> Void) {
@@ -43,8 +51,7 @@ class BeerListViewModel {
     
     private func configureModels(list: [Beer]) {
         self.items = list.map { BeerCellModel(beer: $0) }
-        self.searchItems = self.items
-        self.reloadHandler()
+        self.searchItems.accept(self.items)
     }
 }
 
@@ -60,7 +67,7 @@ extension BeerListViewModel {
     }
     
     func applyFilters(filters: [FilterType: [String]]) {
-		self.searchItems = self.items.filter { item -> Bool in
+		let filterItems = self.items.filter { item -> Bool in
 			var acceptArray: [Bool] = []
 			for (key, value) in filters {
 				switch key {
@@ -76,7 +83,7 @@ extension BeerListViewModel {
 				return result && value
 			})
 		}
-        self.reloadHandler()
+        self.searchItems.accept(filterItems)
     }
 }
 
@@ -85,19 +92,17 @@ extension BeerListViewModel {
     
     func filterSearch(searchText: String) {
         if searchText.isEmpty {
-            self.searchItems = self.items
+            self.searchItems.accept(self.items)
         } else {
-            self.searchItems.removeAll()
-            self.searchItems = self.items.filter {
+            let value = self.items.filter {
                 $0.beer.name.lowercased().contains(searchText.lowercased())
             }
+            self.searchItems.accept(value)
         }
-        self.reloadHandler()
     }
     
     func resetData() {
-        self.searchItems = self.items
-        self.reloadHandler()
+        self.searchItems.accept(self.items)
     }
 }
 
@@ -106,13 +111,13 @@ extension BeerListViewModel {
     
     func sortItems() {
         self.isAscending = !self.isAscending
-        self.searchItems = self.searchItems.sorted(by: {
+        let value = self.searchItems.value.sorted(by: {
             let order = $0.beer.abv.compare($1.beer.abv,
                                             options: .numeric)
             return self.isAscending ?
                    order == .orderedAscending :
                    order == .orderedDescending
         })
-        self.reloadHandler()
+        self.searchItems.accept(value)
     }
 }
