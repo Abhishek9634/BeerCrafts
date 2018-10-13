@@ -9,4 +9,6 @@ end
 target 'BeerCrafts' do
   	pod 'MBProgressHUD', '~> 1.0'
 	pod 'SDWebImage', '~> 3.8'
+    pod 'RxSwift', '~> 4.0'
+    pod 'RxCocoa', '~> 4.0'
 end
