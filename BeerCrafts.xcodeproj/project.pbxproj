@@ -41,6 +41,10 @@
 		46CA619120E6B3E9004B2EBB /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA619020E6B3E9004B2EBB /* Models.swift */; };
 		46CA619320E6CA3D004B2EBB /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA619220E6CA3D004B2EBB /* FiltersViewController.swift */; };
 		955BA6A8020BE745BA0A4568 /* Pods_AppModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8B84AA7603EB4875EF1EDD /* Pods_AppModel.framework */; };
+		9FAAE2862172615C00EA91F0 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAAE2852172615C00EA91F0 /* CartManager.swift */; };
+		9FAAE28821726CC200EA91F0 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAAE28721726CC200EA91F0 /* CartViewController.swift */; };
+		9FAAE28B21726F9F00EA91F0 /* CartProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAAE28921726F9F00EA91F0 /* CartProductTableViewCell.swift */; };
+		9FAAE28C21726F9F00EA91F0 /* CartProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FAAE28A21726F9F00EA91F0 /* CartProductTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +110,10 @@
 		46CA619020E6B3E9004B2EBB /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		46CA619220E6CA3D004B2EBB /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		61142CBF7ED110EF4323547D /* Pods-BeerCrafts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerCrafts.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeerCrafts/Pods-BeerCrafts.release.xcconfig"; sourceTree = "<group>"; };
+		9FAAE2852172615C00EA91F0 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		9FAAE28721726CC200EA91F0 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		9FAAE28921726F9F00EA91F0 /* CartProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductTableViewCell.swift; sourceTree = "<group>"; };
+		9FAAE28A21726F9F00EA91F0 /* CartProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartProductTableViewCell.xib; sourceTree = "<group>"; };
 		BD1A8F3F23A4F70405E075B2 /* Pods-BeerCrafts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerCrafts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerCrafts/Pods-BeerCrafts.debug.xcconfig"; sourceTree = "<group>"; };
 		DFBC984F1369608508680DA4 /* Pods_BeerCrafts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerCrafts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -165,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				4669C50920E6963D00B52217 /* AppDelegate.swift */,
+				9FAAE2842172614600EA91F0 /* Cart */,
 				4669C52720E6991800B52217 /* UI */,
 				4669C51B20E6980800B52217 /* Common */,
 				4669C52620E6990000B52217 /* Resources */,
@@ -258,6 +267,7 @@
 				4669C50B20E6963D00B52217 /* MainViewController.swift */,
 				46CA618820E6A5C0004B2EBB /* BeerListViewController.swift */,
 				46CA619220E6CA3D004B2EBB /* FiltersViewController.swift */,
+				9FAAE28721726CC200EA91F0 /* CartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -271,6 +281,8 @@
 				462BABD7210C769700070DA1 /* FilterTableViewCell.xib */,
 				462BABDA210C776000070DA1 /* FilterHeaderView.swift */,
 				462BABDC210C776B00070DA1 /* FilterHeaderView.xib */,
+				9FAAE28921726F9F00EA91F0 /* CartProductTableViewCell.swift */,
+				9FAAE28A21726F9F00EA91F0 /* CartProductTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,6 +306,14 @@
 				3EB8246EBBA1BBBECCA2133F /* Pods-AppModel.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9FAAE2842172614600EA91F0 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				9FAAE2852172615C00EA91F0 /* CartManager.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		FA2D9D6D5783123CF878DEFB /* Frameworks */ = {
@@ -404,6 +424,7 @@
 				4679F083210B2BF700711FC8 /* beer.json in Resources */,
 				462BABD9210C769700070DA1 /* FilterTableViewCell.xib in Resources */,
 				462BABDD210C776B00070DA1 /* FilterHeaderView.xib in Resources */,
+				9FAAE28C21726F9F00EA91F0 /* CartProductTableViewCell.xib in Resources */,
 				4669C51420E6963E00B52217 /* LaunchScreen.storyboard in Resources */,
 				4669C51120E6963E00B52217 /* Assets.xcassets in Resources */,
 				4669C50F20E6963D00B52217 /* Main.storyboard in Resources */,
@@ -495,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4669C52520E698E900B52217 /* UIView+Helper.swift in Sources */,
+				9FAAE2862172615C00EA91F0 /* CartManager.swift in Sources */,
 				462BABDB210C776000070DA1 /* FilterHeaderView.swift in Sources */,
 				46CA618D20E6B208004B2EBB /* BeerTableViewCell.swift in Sources */,
 				4669C52120E6986B00B52217 /* ImageView.swift in Sources */,
@@ -506,7 +528,9 @@
 				46CA618920E6A5C0004B2EBB /* BeerListViewController.swift in Sources */,
 				462BABD8210C769700070DA1 /* FilterTableViewCell.swift in Sources */,
 				4669C51F20E6984B00B52217 /* CollectionViewCell.swift in Sources */,
+				9FAAE28821726CC200EA91F0 /* CartViewController.swift in Sources */,
 				4669C50A20E6963D00B52217 /* AppDelegate.swift in Sources */,
+				9FAAE28B21726F9F00EA91F0 /* CartProductTableViewCell.swift in Sources */,
 				46CA619320E6CA3D004B2EBB /* FiltersViewController.swift in Sources */,
 				46CA619120E6B3E9004B2EBB /* Models.swift in Sources */,
 			);

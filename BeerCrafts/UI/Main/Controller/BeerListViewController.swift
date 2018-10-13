@@ -18,7 +18,9 @@ class BeerListViewController: UIViewController {
     
     private struct Segue {
         static let Filters = "FiltersVCSegueId"
+        static let Cart = "CartViewSegueId"
     }
+    @IBOutlet weak var cartButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,7 @@ class BeerListViewController: UIViewController {
     }
     
     @IBAction func cartAction(_ sender: Any) {
-        
+        self.performSegue(withIdentifier: Segue.Cart, sender: nil)
     }
     
     @IBAction func sortAction(_ sender: Any) {
@@ -63,6 +65,10 @@ extension BeerListViewController {
         self.viewModel.fetchItems { _ in
             self.hideLoader()
         }
+        
+        let _ = CartManager.shared.cartItems.subscribe(onNext: { _ in
+            self.cartButton.title = "\(CartManager.shared.cartItems.value.count) Item"
+        })
     }
     
     private func showFilters() {
@@ -107,7 +113,7 @@ extension BeerListViewController: UITableViewDelegate, UITableViewDataSource {
 extension BeerListViewController: BeerTableViewCellDelegate {
     
     func didTapAddButton(cell: BeerTableViewCell) {
-        
+        CartManager.shared.add(beer: (cell.item as! BeerCellModel).beer)
     }
 }
 

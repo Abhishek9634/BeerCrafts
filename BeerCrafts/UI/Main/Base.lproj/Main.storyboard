@@ -134,14 +134,48 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cartButton" destination="aPz-od-EYm" id="O2q-fv-w1j"/>
                         <outlet property="searchBar" destination="IiV-Rf-bc2" id="ELS-yv-MZ5"/>
                         <outlet property="tableView" destination="eNI-uW-VL7" id="Q8Z-kJ-xuL"/>
                         <segue destination="1GU-vu-V8g" kind="show" identifier="FiltersVCSegueId" id="7fo-cc-QUN"/>
+                        <segue destination="d1g-GR-cCc" kind="show" identifier="CartViewSegueId" id="1ZD-kV-aFv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7T-gU-Zmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-573.46326836581716"/>
+        </scene>
+        <!--Cart-->
+        <scene sceneID="HO7-xN-KRY">
+            <objects>
+                <viewController storyboardIdentifier="CartViewController" id="d1g-GR-cCc" customClass="CartViewController" customModule="BeerCrafts" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yXZ-j1-RxX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rc6-eI-ab4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <viewLayoutGuide key="safeArea" id="pyF-n3-uFr"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1wL-AP-lAK" firstAttribute="bottom" secondItem="Rc6-eI-ab4" secondAttribute="bottom" id="O57-zB-K1k"/>
+                            <constraint firstItem="Rc6-eI-ab4" firstAttribute="top" secondItem="yXZ-j1-RxX" secondAttribute="top" id="h3f-p7-BxJ"/>
+                            <constraint firstItem="1wL-AP-lAK" firstAttribute="trailing" secondItem="Rc6-eI-ab4" secondAttribute="trailing" id="maI-Hb-P3x"/>
+                            <constraint firstItem="Rc6-eI-ab4" firstAttribute="leading" secondItem="1wL-AP-lAK" secondAttribute="leading" id="yS3-Pm-9K7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1wL-AP-lAK"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Cart" id="DmM-wR-RyK"/>
+                    <connections>
+                        <outlet property="tableView" destination="Rc6-eI-ab4" id="MSV-Bn-B5O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IX6-As-PHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3365.5999999999999" y="-203.74812593703149"/>
         </scene>
         <!--Filters-->
         <scene sceneID="kCd-Ry-VBY">
@@ -223,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KiQ-IO-bU6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3133.5999999999999" y="-573.46326836581716"/>
+            <point key="canvasLocation" x="3366" y="-1003"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dKK-4p-LYY">
