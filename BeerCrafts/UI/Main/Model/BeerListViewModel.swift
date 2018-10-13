@@ -34,10 +34,6 @@ class BeerListViewModel {
             if let error = error {
                 completion(error)
             } else {
-                print("TOTAL ITEMS: \(list.count)")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
-//                    self?.configureModels(list: list)
-//                })
                 self?.configureModels(list: list)
                 self?.configureFilters(list: list)
                 completion(nil)
