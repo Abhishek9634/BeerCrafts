@@ -51,7 +51,6 @@ class CartManager {
         self.cartItems.accept(value)
     }
     
-    //TODO: DECRESE NOT WORKING PROPERLY AFTER COUNT = 1
     func updateQuantity(beer: Beer, isIncreasing: Bool = true) {
         guard let index = self.cartItems.value.index(where: {
             $0.beer.id == beer.id
@@ -65,7 +64,7 @@ class CartManager {
         } else {
             // CASE QUANTITY DECREASING
             if value[index].quantity == 1 {
-                self.remove(beer: beer)
+                value.remove(at: index)
             } else {
                 value[index].quantity -= 1
             }
